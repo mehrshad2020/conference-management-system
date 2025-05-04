@@ -90,7 +90,7 @@ window.updateThemeIcons = function(isDark) {
                     icon.classList.remove('fa-moon');
                     icon.classList.add('fa-sun');
                 } else {
-                    icon.textContent = '☀️';
+                    // icon.textContent = '☀️';
                 }
             } else {
                 if (icon.classList.contains('fa-sun')) {
