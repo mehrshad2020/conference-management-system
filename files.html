@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فایل‌ها - سامانه مدیریت همایش‌ها</title>
+    <script>
+        // Configure Tailwind to use class strategy for dark mode
+        tailwind = {
+            config: {
+                darkMode: 'class'
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div class="min-h-screen flex flex-col md:flex-row">
+        <!-- Sidebar included via JavaScript -->
+        <div id="sidebar-container"></div>
+        
+        <!-- Main content -->
+        <main class="flex-1 p-6 overflow-auto">
+            <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">فایل‌ها</h1>
+                    <p class="text-gray-600 dark:text-gray-400">دسترسی به فایل‌ها و منابع همایش‌ها</p>
+                </div>
+                <button id="uploadFileBtn" class="mt-4 md:mt-0 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                    <i class="fas fa-upload ml-1"></i> آپلود فایل جدید
+                </button>
+            </div>
+            
+            <!-- Filter and Search -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 mb-6">
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                    <div class="flex-1 relative">
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                            <i class="fas fa-search text-gray-400"></i>
+                        </div>
+                        <input type="text" class="w-full pr-10 px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="جستجوی فایل...">
+                    </div>
+                    
+                    <div class="w-full md:w-48">
+                        <select class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">همه همایش‌ها</option>
+                            <option>همایش هوش مصنوعی</option>
+                            <option>همایش امنیت سایبری</option>
+                            <option>همایش علوم داده</option>
+                        </select>
+                    </div>
+                    
+                    <div class="w-full md:w-48">
+                        <select class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">همه انواع فایل</option>
+                            <option>اسناد و مقالات</option>
+                            <option>اسلایدها</option>
+                            <option>ویدیوها</option>
+                            <option>نرم‌افزارها</option>
+                        </select>
+                    </div>
+                    
+                    <button class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                        اعمال فیلتر
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Files Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- File Card 1 - PDF -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-red-100 dark:bg-red-900/20 rounded-lg flex items-center justify-center text-red-600 dark:text-red-400">
+                                <i class="fas fa-file-pdf text-xl"></i>
+                            </div>
+                            <div class="mr-4">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">جزوه هوش مصنوعی</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">همایش هوش مصنوعی و کاربردهای آن</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-calendar-day ml-1"></i>
+                                <span>آپلود: ۵ مهر ۱۴۰۳</span>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-file-alt ml-1"></i>
+                                <span>۲.۵ مگابایت</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500 dark:text-gray-400">۴۸ بار دانلود</span>
+                            <button class="px-3 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                <i class="fas fa-download ml-1"></i> دانلود
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- File Card 2 - Excel -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center text-green-600 dark:text-green-400">
+                                <i class="fas fa-file-excel text-xl"></i>
+                            </div>
+                            <div class="mr-4">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">برنامه کلاس‌ها</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">همایش امنیت سایبری</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-calendar-day ml-1"></i>
+                                <span>آپلود: ۲۰ مهر ۱۴۰۳</span>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-file-alt ml-1"></i>
+                                <span>۵۰۰ کیلوبایت</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500 dark:text-gray-400">۳۵ بار دانلود</span>
+                            <button class="px-3 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                <i class="fas fa-download ml-1"></i> دانلود
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- File Card 3 - PPT -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400">
+                                <i class="fas fa-file-powerpoint text-xl"></i>
+                            </div>
+                            <div class="mr-4">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">ارائه پروژه نهایی</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">همایش علوم داده و یادگیری ماشین</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-calendar-day ml-1"></i>
+                                <span>آپلود: ۱۵ آذر ۱۴۰۳</span>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-file-alt ml-1"></i>
+                                <span>۱.۸ مگابایت</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500 dark:text-gray-400">۲۲ بار دانلود</span>
+                            <button class="px-3 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                <i class="fas fa-download ml-1"></i> دانلود
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- File Card 4 - Zip -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/20 rounded-lg flex items-center justify-center text-yellow-600 dark:text-yellow-400">
+                                <i class="fas fa-file-archive text-xl"></i>
+                            </div>
+                            <div class="mr-4">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">کد منبع پروژه</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">همایش توسعه وب مدرن</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-calendar-day ml-1"></i>
+                                <span>آپلود: ۲۵ دی ۱۴۰۳</span>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-file-alt ml-1"></i>
+                                <span>۳.۲ مگابایت</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500 dark:text-gray-400">۱۸ بار دانلود</span>
+                            <button class="px-3 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                <i class="fas fa-download ml-1"></i> دانلود
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- File Card 5 - Video -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center text-blue-600 dark:text-blue-400">
+                                <i class="fas fa-file-video text-xl"></i>
+                            </div>
+                            <div class="mr-4">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">ویدیو معرفی همایش</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">همایش هوش مصنوعی و کاربردهای آن</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-calendar-day ml-1"></i>
+                                <span>آپلود: ۱ مهر ۱۴۰۳</span>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-file-alt ml-1"></i>
+                                <span>۱۵ مگابایت</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500 dark:text-gray-400">۶۵ بار مشاهده</span>
+                            <button class="px-3 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                <i class="fas fa-play ml-1"></i> مشاهده
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- File Card 6 - Image -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-pink-100 dark:bg-pink-900/20 rounded-lg flex items-center justify-center text-pink-600 dark:text-pink-400">
+                                <i class="fas fa-file-image text-xl"></i>
+                            </div>
+                            <div class="mr-4">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">پوستر همایش</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">همایش امنیت سایبری</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-calendar-day ml-1"></i>
+                                <span>آپلود: ۱۵ مهر ۱۴۰۳</span>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-file-alt ml-1"></i>
+                                <span>۸۰۰ کیلوبایت</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500 dark:text-gray-400">۴۲ بار دانلود</span>
+                            <button class="px-3 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                <i class="fas fa-download ml-1"></i> دانلود
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="mt-8 flex justify-center">
+                <nav class="flex items-center space-x-1 space-x-reverse">
+                    <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-500 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                    <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-white bg-blue-600 border border-blue-600">
+                        ۱
+                    </a>
+                    <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                        ۲
+                    </a>
+                    <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                        ۳
+                    </a>
+                    <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-500 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Upload File Modal (hidden by default) -->
+    <div id="uploadFileModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white dark:bg-gray-800 w-full max-w-xl rounded-lg shadow-lg p-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white">آپلود فایل جدید</h2>
+                <button id="closeUploadFileModal" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="uploadFileForm">
+                <div class="space-y-4">
+                    <div>
+                        <label for="fileTitle" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">عنوان فایل</label>
+                        <input type="text" id="fileTitle" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    
+                    <div>
+                        <label for="fileConference" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">همایش مرتبط</label>
+                        <select id="fileConference" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <option value="">انتخاب کنید</option>
+                            <option>همایش هوش مصنوعی و کاربردهای آن</option>
+                            <option>همایش امنیت سایبری</option>
+                            <option>همایش علوم داده و یادگیری ماشین</option>
+                            <option>همایش توسعه وب مدرن</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="fileType" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">نوع فایل</label>
+                        <select id="fileType" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <option value="">انتخاب کنید</option>
+                            <option>اسناد و مقالات</option>
+                            <option>اسلایدها</option>
+                            <option>ویدیوها</option>
+                            <option>نرم‌افزارها</option>
+                            <option>تصاویر</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="fileDescription" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">توضیحات (اختیاری)</label>
+                        <textarea id="fileDescription" rows="3" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+                    
+                    <div>
+                        <label for="fileUpload" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">انتخاب فایل</label>
+                        <input type="file" id="fileUpload" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <button type="button" id="cancelUploadFile" class="px-4 py-2 mr-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 transition-colors">
+                        انصراف
+                    </button>
+                    <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                        آپلود فایل
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="js/theme.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/files.js"></script>
+</body>
+</html> 

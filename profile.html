@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پروفایل - سامانه مدیریت همایش‌ها</title>
+    <script>
+        // Configure Tailwind to use class strategy for dark mode
+        tailwind = {
+            config: {
+                darkMode: 'class'
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div class="min-h-screen flex flex-col md:flex-row">
+        <!-- Sidebar included via JavaScript -->
+        <div id="sidebar-container"></div>
+        
+        <!-- Main content -->
+        <main class="flex-1 p-6 overflow-auto">
+            <div class="mb-6">
+                <h1 class="text-2xl font-bold text-gray-900 dark:text-white">پروفایل کاربری</h1>
+                <p class="text-gray-600 dark:text-gray-400">اطلاعات و تنظیمات حساب کاربری شما</p>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                <div class="border-b border-gray-200 dark:border-gray-700">
+                    <nav class="flex flex-wrap">
+                        <button class="px-6 py-4 font-medium text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 focus:outline-none" data-tab="personal-info">
+                            اطلاعات شخصی
+                        </button>
+                        <button class="px-6 py-4 font-medium text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none" data-tab="security">
+                            امنیت
+                        </button>
+                        <button class="px-6 py-4 font-medium text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none" data-tab="preferences">
+                            تنظیمات
+                        </button>
+                    </nav>
+                </div>
+                
+                <div class="p-6">
+                    <!-- Personal Info Tab (Active by default) -->
+                    <div id="personal-info" class="tab-content">
+                        <form id="personalInfoForm">
+                            <div class="flex flex-col md:flex-row items-start md:space-x-6 md:space-x-reverse mb-6">
+                                <div class="w-32 h-32 mb-4 md:mb-0">
+                                    <div class="relative w-full h-full">
+                                        <div class="w-full h-full rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
+                                            <img id="profileImage" src="https://placehold.co/200x200/3b82f6/FFFFFF/png?text=User" alt="تصویر پروفایل" class="w-full h-full object-cover">
+                                        </div>
+                                        <label for="profileImageInput" class="absolute bottom-0 right-0 w-8 h-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center cursor-pointer">
+                                            <i class="fas fa-camera"></i>
+                                            <input type="file" id="profileImageInput" class="hidden" accept="image/*">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="firstName" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">نام</label>
+                                            <input type="text" id="firstName" value="علی" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        </div>
+                                        <div>
+                                            <label for="lastName" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">نام خانوادگی</label>
+                                            <input type="text" id="lastName" value="محمدی" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        </div>
+                                        <div>
+                                            <label for="email" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">ایمیل</label>
+                                            <input type="email" id="email" value="ali@example.com" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        </div>
+                                        <div>
+                                            <label for="phone" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">شماره تماس</label>
+                                            <input type="tel" id="phone" value="۰۹۱۲۳۴۵۶۷۸۹" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        </div>
+                                        <div class="student-only">
+                                            <label for="studentId" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">شماره دانشجویی</label>
+                                            <input type="text" id="studentId" value="۹۸۱۲۳۴۵۶" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        </div>
+                                        <div class="teacher-only hidden">
+                                            <label for="facultyId" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">کد استادی</label>
+                                            <input type="text" id="facultyId" value="۱۲۳۴۵" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        </div>
+                                        <div class="md:col-span-2">
+                                            <label for="bio" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">بیوگرافی</label>
+                                            <textarea id="bio" rows="3" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">دانشجوی رشته مهندسی کامپیوتر دانشگاه تهران</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-end">
+                                <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                    ذخیره تغییرات
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Security Tab (Hidden by default) -->
+                    <div id="security" class="tab-content hidden">
+                        <form id="securityForm">
+                            <div class="space-y-4 mb-6">
+                                <div>
+                                    <label for="currentPassword" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">رمز عبور فعلی</label>
+                                    <input type="password" id="currentPassword" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                </div>
+                                <div>
+                                    <label for="newPassword" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">رمز عبور جدید</label>
+                                    <input type="password" id="newPassword" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                </div>
+                                <div>
+                                    <label for="confirmPassword" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">تکرار رمز عبور جدید</label>
+                                    <input type="password" id="confirmPassword" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-end">
+                                <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                    تغییر رمز عبور
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Preferences Tab (Hidden by default) -->
+                    <div id="preferences" class="tab-content hidden">
+                        <form id="preferencesForm">
+                            <div class="space-y-4 mb-6">
+                                <div>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded focus:ring-2 focus:ring-blue-500" checked>
+                                        <span class="mr-2 text-gray-700 dark:text-gray-300">دریافت اعلان‌های ایمیلی</span>
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded focus:ring-2 focus:ring-blue-500" checked>
+                                        <span class="mr-2 text-gray-700 dark:text-gray-300">اعلان همایش‌های جدید</span>
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded focus:ring-2 focus:ring-blue-500">
+                                        <span class="mr-2 text-gray-700 dark:text-gray-300">خبرنامه هفتگی</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6">
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-3">تنظیمات ظاهری</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label for="theme" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">حالت نمایش</label>
+                                        <select id="theme" class="w-full md:w-64 px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                            <option value="light">روشن</option>
+                                            <option value="dark">تاریک</option>
+                                            <option value="system" selected>پیش‌فرض سیستم</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-end mt-6">
+                                <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                    ذخیره تنظیمات
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/theme.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html> 

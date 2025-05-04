@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>همایش‌ها - سامانه مدیریت همایش‌ها</title>
+    <script>
+        // Configure Tailwind to use class strategy for dark mode
+        tailwind = {
+            config: {
+                darkMode: 'class'
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div class="min-h-screen flex flex-col md:flex-row">
+        <!-- Sidebar included via JavaScript -->
+        <div id="sidebar-container"></div>
+        
+        <!-- Main content -->
+        <main class="flex-1 p-6 overflow-auto">
+            <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">همایش‌ها</h1>
+                    <p class="text-gray-600 dark:text-gray-400">مشاهده و ثبت‌نام در همایش‌ها</p>
+                </div>
+                <button id="createConferenceBtn" class="mt-4 md:mt-0 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors teacher-only hidden">
+                    <i class="fas fa-plus ml-1"></i> ایجاد همایش جدید
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Conference Card 1 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <div class="relative h-48 bg-gray-200 dark:bg-gray-700">
+                        <img src="https://placehold.co/800x400/3b82f6/FFFFFF/png?text=AI+Conference" alt="همایش هوش مصنوعی" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 px-3 py-1 bg-blue-600 text-white text-sm font-medium rounded-full">
+                            علمی
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">همایش هوش مصنوعی و کاربردهای آن</h3>
+                        <div class="flex flex-wrap text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-calendar-day ml-1"></i>
+                                <span>۱۰ مهر ۱۴۰۳</span>
+                            </div>
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-clock ml-1"></i>
+                                <span>۹:۰۰ الی ۱۷:۰۰</span>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-map-marker-alt ml-1"></i>
+                                <span>دانشکده مهندسی کامپیوتر</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">در این همایش به بررسی آخرین دستاوردهای هوش مصنوعی و کاربردهای آن در صنعت و آموزش پرداخته خواهد شد.</p>
+                        <div class="flex flex-wrap justify-between items-center">
+                            <span class="text-sm font-medium text-gray-900 dark:text-white mb-2 md:mb-0">ظرفیت: <span class="text-blue-600 dark:text-blue-400">۱۲۰ نفر</span></span>
+                            <a href="conference-details.html?id=1" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                مشاهده و ثبت‌نام
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Conference Card 2 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <div class="relative h-48 bg-gray-200 dark:bg-gray-700">
+                        <img src="https://placehold.co/800x400/ef4444/FFFFFF/png?text=Security+Conference" alt="همایش امنیت سایبری" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 px-3 py-1 bg-red-600 text-white text-sm font-medium rounded-full">
+                            آموزشی
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">همایش امنیت سایبری</h3>
+                        <div class="flex flex-wrap text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-calendar-day ml-1"></i>
+                                <span>۲۵ آبان ۱۴۰۳</span>
+                            </div>
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-clock ml-1"></i>
+                                <span>۱۰:۰۰ الی ۱۶:۰۰</span>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-map-marker-alt ml-1"></i>
+                                <span>تالار امیرکبیر</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">همایش تخصصی امنیت سایبری با محوریت تهدیدات جدید و راه‌های مقابله با آنها همراه با کارگاه‌های عملی.</p>
+                        <div class="flex flex-wrap justify-between items-center">
+                            <span class="text-sm font-medium text-gray-900 dark:text-white mb-2 md:mb-0">ظرفیت: <span class="text-blue-600 dark:text-blue-400">۸۰ نفر</span></span>
+                            <a href="conference-details.html?id=2" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                مشاهده و ثبت‌نام
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Conference Card 3 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <div class="relative h-48 bg-gray-200 dark:bg-gray-700">
+                        <img src="https://placehold.co/800x400/10b981/FFFFFF/png?text=Data+Science+Conference" alt="همایش علوم داده" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 px-3 py-1 bg-green-600 text-white text-sm font-medium rounded-full">
+                            پژوهشی
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">همایش علوم داده و یادگیری ماشین</h3>
+                        <div class="flex flex-wrap text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-calendar-day ml-1"></i>
+                                <span>۵ دی ۱۴۰۳</span>
+                            </div>
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-clock ml-1"></i>
+                                <span>۹:۰۰ الی ۱۸:۰۰</span>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-map-marker-alt ml-1"></i>
+                                <span>مرکز همایش‌های رازی</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">همایش تخصصی در زمینه علوم داده و یادگیری ماشین با سخنرانان برجسته داخلی و بین‌المللی.</p>
+                        <div class="flex flex-wrap justify-between items-center">
+                            <span class="text-sm font-medium text-gray-900 dark:text-white mb-2 md:mb-0">ظرفیت: <span class="text-blue-600 dark:text-blue-400">۱۵۰ نفر</span></span>
+                            <a href="conference-details.html?id=3" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                مشاهده و ثبت‌نام
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Conference Card 4 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <div class="relative h-48 bg-gray-200 dark:bg-gray-700">
+                        <img src="https://placehold.co/800x400/8b5cf6/FFFFFF/png?text=Web+Development" alt="همایش توسعه وب" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 px-3 py-1 bg-purple-600 text-white text-sm font-medium rounded-full">
+                            کارگاهی
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">همایش توسعه وب مدرن</h3>
+                        <div class="flex flex-wrap text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-calendar-day ml-1"></i>
+                                <span>۱۵ بهمن ۱۴۰۳</span>
+                            </div>
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-clock ml-1"></i>
+                                <span>۱۰:۰۰ الی ۱۷:۰۰</span>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-map-marker-alt ml-1"></i>
+                                <span>دانشکده فنی مهندسی</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">کارگاه‌های عملی توسعه وب مدرن با فریم‌ورک‌های جدید به همراه ارائه گواهی معتبر.</p>
+                        <div class="flex flex-wrap justify-between items-center">
+                            <span class="text-sm font-medium text-gray-900 dark:text-white mb-2 md:mb-0">ظرفیت: <span class="text-blue-600 dark:text-blue-400">۶۰ نفر</span></span>
+                            <a href="conference-details.html?id=4" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                مشاهده و ثبت‌نام
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="mt-8 flex justify-center">
+                <nav class="flex items-center space-x-1 space-x-reverse">
+                    <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-500 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                    <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-white bg-blue-600 border border-blue-600">
+                        ۱
+                    </a>
+                    <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                        ۲
+                    </a>
+                    <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                        ۳
+                    </a>
+                    <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-500 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Create Conference Modal (hidden by default) -->
+    <div id="createConferenceModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white dark:bg-gray-800 w-full max-w-xl rounded-lg shadow-lg p-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white">ایجاد همایش جدید</h2>
+                <button id="closeCreateConferenceModal" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="createConferenceForm">
+                <div class="space-y-4">
+                    <div>
+                        <label for="conferenceTitle" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">عنوان همایش</label>
+                        <input type="text" id="conferenceTitle" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    
+                    <div>
+                        <label for="conferenceType" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">نوع همایش</label>
+                        <select id="conferenceType" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <option value="">انتخاب کنید</option>
+                            <option value="scientific">علمی</option>
+                            <option value="educational">آموزشی</option>
+                            <option value="research">پژوهشی</option>
+                            <option value="workshop">کارگاهی</option>
+                        </select>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="conferenceDate" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">تاریخ برگزاری</label>
+                            <input type="date" id="conferenceDate" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        
+                        <div>
+                            <label for="conferenceCapacity" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">ظرفیت (نفر)</label>
+                            <input type="number" id="conferenceCapacity" min="1" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="conferenceLocation" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">محل برگزاری</label>
+                        <input type="text" id="conferenceLocation" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    
+                    <div>
+                        <label for="conferenceDescription" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">توضیحات</label>
+                        <textarea id="conferenceDescription" rows="4" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                    </div>
+                    
+                    <div>
+                        <label for="conferenceImage" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">تصویر همایش</label>
+                        <input type="file" id="conferenceImage" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" accept="image/*">
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <button type="button" id="cancelCreateConference" class="px-4 py-2 mr-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 transition-colors">
+                        انصراف
+                    </button>
+                    <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                        ایجاد همایش
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="js/theme.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/conferences.js"></script>
+</body>
+</html> 

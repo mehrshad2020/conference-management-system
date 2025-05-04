@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جزئیات همایش - سامانه مدیریت همایش‌ها</title>
+    <script>
+        // Configure Tailwind to use class strategy for dark mode
+        tailwind = {
+            config: {
+                darkMode: 'class'
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div class="min-h-screen flex flex-col md:flex-row">
+        <!-- Sidebar included via JavaScript -->
+        <div id="sidebar-container"></div>
+        
+        <!-- Main content -->
+        <main class="flex-1 p-6 overflow-auto">
+            <!-- Back button -->
+            <div class="mb-6">
+                <a href="conferences.html" class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline">
+                    <i class="fas fa-arrow-right ml-1"></i>
+                    <span>بازگشت به همایش‌ها</span>
+                </a>
+            </div>
+            
+            <!-- Conference header -->
+            <div class="relative rounded-lg overflow-hidden mb-8">
+                <img src="https://placehold.co/1200x400/3b82f6/FFFFFF/png?text=AI+Conference" alt="همایش هوش مصنوعی" class="w-full h-64 md:h-80 object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+                    <div class="p-6 w-full">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="px-3 py-1 bg-blue-600 text-white text-sm font-medium rounded-full">
+                                علمی
+                            </span>
+                            <span class="px-3 py-1 bg-green-600 text-white text-sm font-medium rounded-full">
+                                در حال ثبت‌نام
+                            </span>
+                        </div>
+                        <h1 class="text-3xl font-bold text-white mb-2">همایش هوش مصنوعی و کاربردهای آن</h1>
+                        <div class="flex flex-wrap text-sm text-gray-200 gap-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-calendar-day ml-1"></i>
+                                <span>۱۰ مهر ۱۴۰۳</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-clock ml-1"></i>
+                                <span>۹:۰۰ الی ۱۷:۰۰</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt ml-1"></i>
+                                <span>دانشکده مهندسی کامپیوتر</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Main conference info -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- About section -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                        <div class="border-b border-gray-200 dark:border-gray-700 px-6 py-4">
+                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">درباره همایش</h2>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                                در این همایش به بررسی آخرین دستاوردهای هوش مصنوعی و کاربردهای آن در صنعت و آموزش پرداخته خواهد شد. سخنرانان برجسته داخلی و بین‌المللی آخرین یافته‌های خود را در این زمینه ارائه خواهند داد.
+                            </p>
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                                هوش مصنوعی یکی از مهم‌ترین فناوری‌های قرن ۲۱ است که تأثیر عمیقی بر تمام جنبه‌های زندگی بشر گذاشته است. در این همایش، کاربردهای هوش مصنوعی در حوزه‌های مختلف از جمله پزشکی، کشاورزی، آموزش، صنعت و تجارت بررسی می‌شود.
+                            </p>
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                                این همایش فرصتی مناسب برای دانشجویان، اساتید، پژوهشگران و متخصصان صنعت است تا با آخرین دستاوردها آشنا شوند و فرصت‌های همکاری و تبادل نظر را فراهم کنند.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Agenda section -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                        <div class="border-b border-gray-200 dark:border-gray-700 px-6 py-4">
+                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">برنامه همایش</h2>
+                        </div>
+                        <div class="p-6">
+                            <div class="space-y-6">
+                                <div class="border-r-2 border-blue-500 pr-4">
+                                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">افتتاحیه</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">۹:۰۰ - ۹:۳۰</p>
+                                    <p class="text-gray-700 dark:text-gray-300">سخنرانی افتتاحیه توسط رئیس دانشکده مهندسی کامپیوتر</p>
+                                </div>
+                                
+                                <div class="border-r-2 border-blue-500 pr-4">
+                                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">سخنرانی کلیدی</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">۹:۳۰ - ۱۰:۳۰</p>
+                                    <p class="text-gray-700 dark:text-gray-300">هوش مصنوعی: چالش‌ها و فرصت‌ها - دکتر علی محمدی</p>
+                                </div>
+                                
+                                <div class="border-r-2 border-blue-500 pr-4">
+                                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">استراحت و پذیرایی</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">۱۰:۳۰ - ۱۱:۰۰</p>
+                                </div>
+                                
+                                <div class="border-r-2 border-blue-500 pr-4">
+                                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">پنل تخصصی</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">۱۱:۰۰ - ۱۲:۳۰</p>
+                                    <p class="text-gray-700 dark:text-gray-300">کاربرد هوش مصنوعی در صنعت و چالش‌های پیش رو</p>
+                                </div>
+                                
+                                <div class="border-r-2 border-blue-500 pr-4">
+                                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">ناهار</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">۱۲:۳۰ - ۱۴:۰۰</p>
+                                </div>
+                                
+                                <div class="border-r-2 border-blue-500 pr-4">
+                                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">کارگاه‌های موازی</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">۱۴:۰۰ - ۱۶:۰۰</p>
+                                    <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
+                                        <li>کارگاه یادگیری عمیق - سالن A</li>
+                                        <li>کارگاه پردازش زبان طبیعی - سالن B</li>
+                                        <li>کارگاه بینایی ماشین - سالن C</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="border-r-2 border-blue-500 pr-4">
+                                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">جمع‌بندی و اختتامیه</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">۱۶:۰۰ - ۱۷:۰۰</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Speakers section -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                        <div class="border-b border-gray-200 dark:border-gray-700 px-6 py-4">
+                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">سخنرانان</h2>
+                        </div>
+                        <div class="p-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div class="flex">
+                                    <div class="w-16 h-16 rounded-full overflow-hidden shrink-0">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="دکتر علی محمدی" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="mr-4">
+                                        <h3 class="text-lg font-medium text-gray-900 dark:text-white">دکتر علی محمدی</h3>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">استاد دانشگاه تهران</p>
+                                        <p class="text-gray-700 dark:text-gray-300 text-sm">متخصص یادگیری ماشین و هوش مصنوعی با سابقه همکاری با گوگل</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex">
+                                    <div class="w-16 h-16 rounded-full overflow-hidden shrink-0">
+                                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="دکتر سارا کریمی" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="mr-4">
+                                        <h3 class="text-lg font-medium text-gray-900 dark:text-white">دکتر سارا کریمی</h3>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">پژوهشگر ارشد پژوهشکده هوش مصنوعی</p>
+                                        <p class="text-gray-700 dark:text-gray-300 text-sm">متخصص پردازش زبان طبیعی و سیستم‌های توصیه‌گر</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex">
+                                    <div class="w-16 h-16 rounded-full overflow-hidden shrink-0">
+                                        <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="مهندس امیر حسینی" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="mr-4">
+                                        <h3 class="text-lg font-medium text-gray-900 dark:text-white">مهندس امیر حسینی</h3>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">مدیر فنی شرکت داده‌پردازان</p>
+                                        <p class="text-gray-700 dark:text-gray-300 text-sm">متخصص کاربرد هوش مصنوعی در کسب‌وکار</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex">
+                                    <div class="w-16 h-16 rounded-full overflow-hidden shrink-0">
+                                        <img src="https://randomuser.me/api/portraits/women/62.jpg" alt="دکتر نیلوفر رضایی" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="mr-4">
+                                        <h3 class="text-lg font-medium text-gray-900 dark:text-white">دکتر نیلوفر رضایی</h3>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">دانشیار دانشگاه صنعتی شریف</p>
+                                        <p class="text-gray-700 dark:text-gray-300 text-sm">متخصص بینایی ماشین و پردازش تصویر</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sidebar info -->
+                <div class="space-y-6">
+                    <!-- Registration box -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                        <div class="border-b border-gray-200 dark:border-gray-700 px-6 py-4">
+                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">ثبت‌نام در همایش</h2>
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-6">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-700 dark:text-gray-300">ظرفیت کل:</span>
+                                    <span class="font-medium text-gray-900 dark:text-white">۱۲۰ نفر</span>
+                                </div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-700 dark:text-gray-300">ثبت‌نام شده:</span>
+                                    <span class="font-medium text-gray-900 dark:text-white">۸۵ نفر</span>
+                                </div>
+                                <div class="flex justify-between mb-4">
+                                    <span class="text-gray-700 dark:text-gray-300">ظرفیت باقیمانده:</span>
+                                    <span class="font-medium text-green-600 dark:text-green-400">۳۵ نفر</span>
+                                </div>
+                                
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <span class="block text-gray-700 dark:text-gray-300 mb-2">هزینه ثبت‌نام:</span>
+                                <span class="text-2xl font-bold text-gray-900 dark:text-white">۲۰۰,۰۰۰ تومان</span>
+                                <span class="block text-xs text-gray-500 dark:text-gray-400 mt-1">شامل ناهار، پذیرایی و بسته همایش</span>
+                            </div>
+                            
+                            <button class="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                ثبت‌نام در همایش
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact info -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                        <div class="border-b border-gray-200 dark:border-gray-700 px-6 py-4">
+                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">اطلاعات تماس</h2>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-4">
+                                <li class="flex">
+                                    <i class="fas fa-envelope w-5 text-gray-500 dark:text-gray-400"></i>
+                                    <span class="mr-2 text-gray-700 dark:text-gray-300">ai-conference@example.com</span>
+                                </li>
+                                <li class="flex">
+                                    <i class="fas fa-phone w-5 text-gray-500 dark:text-gray-400"></i>
+                                    <span class="mr-2 text-gray-700 dark:text-gray-300">۰۲۱-۸۸۷۶۵۴۳۲</span>
+                                </li>
+                                <li class="flex">
+                                    <i class="fas fa-map-marker-alt w-5 text-gray-500 dark:text-gray-400"></i>
+                                    <span class="mr-2 text-gray-700 dark:text-gray-300">تهران، خیابان آزادی، دانشکده مهندسی کامپیوتر</span>
+                                </li>
+                                <li class="flex">
+                                    <i class="fas fa-globe w-5 text-gray-500 dark:text-gray-400"></i>
+                                    <a href="#" class="mr-2 text-blue-600 dark:text-blue-400 hover:underline">www.ai-conference.ir</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Files and resources -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                        <div class="border-b border-gray-200 dark:border-gray-700 px-6 py-4">
+                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">منابع و فایل‌ها</h2>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3">
+                                <li>
+                                    <a href="#" class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-md hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                                        <i class="fas fa-file-pdf text-red-500 w-5"></i>
+                                        <span class="mr-2 text-gray-700 dark:text-gray-300">بروشور همایش</span>
+                                        <span class="mr-auto text-xs text-gray-500 dark:text-gray-400">۸۵۰ کیلوبایت</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-md hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                                        <i class="fas fa-file-image text-purple-500 w-5"></i>
+                                        <span class="mr-2 text-gray-700 dark:text-gray-300">پوستر همایش</span>
+                                        <span class="mr-auto text-xs text-gray-500 dark:text-gray-400">۱.۲ مگابایت</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-md hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                                        <i class="fas fa-file-alt text-blue-500 w-5"></i>
+                                        <span class="mr-2 text-gray-700 dark:text-gray-300">فرم‌های مورد نیاز</span>
+                                        <span class="mr-auto text-xs text-gray-500 dark:text-gray-400">۳۵۰ کیلوبایت</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/theme.js"></script>
+    <script src="js/shared.js"></script>
+    <script>
+        // Conference-specific functionality can be added here
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get conference ID from URL parameter (for future dynamic loading)
+            const urlParams = new URLSearchParams(window.location.search);
+            const conferenceId = urlParams.get('id') || '1';
+            
+            console.log('Loading conference details for ID:', conferenceId);
+            
+            // In a real application, you would fetch the conference data based on the ID
+            // and populate the page elements dynamically
+        });
+    </script>
+</body>
+</html> 

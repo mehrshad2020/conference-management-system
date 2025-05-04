@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدیریت تکالیف - سامانه مدیریت همایش‌ها</title>
+    <script>
+        // Configure Tailwind to use class strategy for dark mode
+        tailwind = {
+            config: {
+                darkMode: 'class'
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div class="min-h-screen flex flex-col md:flex-row">
+        <!-- Sidebar included via JavaScript -->
+        <div id="sidebar-container"></div>
+        
+        <!-- Main content -->
+        <main class="flex-1 p-6 overflow-auto">
+            <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">مدیریت تکالیف</h1>
+                    <p class="text-gray-600 dark:text-gray-400">ایجاد و مدیریت تکالیف برای دانشجویان</p>
+                </div>
+                <button id="createAssignmentBtn" class="mt-4 md:mt-0 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                    <i class="fas fa-plus ml-1"></i> تکلیف جدید
+                </button>
+            </div>
+            
+            <!-- Filter and Search -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 mb-6">
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                    <div class="flex-1 relative">
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                            <i class="fas fa-search text-gray-400"></i>
+                        </div>
+                        <input type="text" class="w-full pr-10 px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="جستجوی تکلیف...">
+                    </div>
+                    
+                    <div class="w-full md:w-48">
+                        <select class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">همه همایش‌ها</option>
+                            <option>همایش هوش مصنوعی</option>
+                            <option>همایش امنیت سایبری</option>
+                            <option>همایش علوم داده</option>
+                        </select>
+                    </div>
+                    
+                    <div class="w-full md:w-48">
+                        <select class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">همه وضعیت‌ها</option>
+                            <option>فعال</option>
+                            <option>به پایان رسیده</option>
+                            <option>آینده</option>
+                        </select>
+                    </div>
+                    
+                    <button class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                        اعمال فیلتر
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Assignments List -->
+            <div class="space-y-6">
+                <!-- Assignment Card 1 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">پروژه هوش مصنوعی</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">همایش هوش مصنوعی و کاربردهای آن</p>
+                            </div>
+                            <div class="mt-3 md:mt-0 flex items-center">
+                                <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">
+                                    فعال
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-calendar-day ml-1"></i>
+                                <span>تاریخ ارائه: ۱۵ مهر ۱۴۰۳</span>
+                            </div>
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-clock ml-1"></i>
+                                <span>مهلت تحویل: ۱۰ روز</span>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-users ml-1"></i>
+                                <span>تعداد تحویل داده شده: ۸ از ۱۵</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">طراحی و پیاده‌سازی یک سیستم تشخیص چهره با استفاده از الگوریتم‌های یادگیری عمیق و ارائه گزارش فنی.</p>
+                        
+                        <div class="flex flex-wrap gap-2">
+                            <button class="px-3 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                <i class="fas fa-eye ml-1"></i> مشاهده جزئیات
+                            </button>
+                            <button class="px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 transition-colors">
+                                <i class="fas fa-edit ml-1"></i> ویرایش
+                            </button>
+                            <button class="px-3 py-1.5 text-sm font-medium text-red-600 dark:text-red-400 hover:text-white hover:bg-red-600 dark:hover:bg-red-600 dark:hover:text-white border border-red-600 dark:border-red-400 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition-colors">
+                                <i class="fas fa-trash ml-1"></i> حذف
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Assignment Card 2 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">ارزیابی آسیب‌پذیری وب</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">همایش امنیت سایبری</p>
+                            </div>
+                            <div class="mt-3 md:mt-0 flex items-center">
+                                <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200">
+                                    به پایان رسیده
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-calendar-day ml-1"></i>
+                                <span>تاریخ ارائه: ۱ آبان ۱۴۰۳</span>
+                            </div>
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-clock ml-1"></i>
+                                <span>مهلت تحویل: ۱۴ روز</span>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-users ml-1"></i>
+                                <span>تعداد تحویل داده شده: ۱۲ از ۱۲</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">انجام تست نفوذ روی یک سایت نمونه و شناسایی آسیب‌پذیری‌های امنیتی به همراه ارائه راهکارهای مقابله.</p>
+                        
+                        <div class="flex flex-wrap gap-2">
+                            <button class="px-3 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                <i class="fas fa-eye ml-1"></i> مشاهده جزئیات
+                            </button>
+                            <button class="px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 transition-colors">
+                                <i class="fas fa-edit ml-1"></i> ویرایش
+                            </button>
+                            <button class="px-3 py-1.5 text-sm font-medium text-red-600 dark:text-red-400 hover:text-white hover:bg-red-600 dark:hover:bg-red-600 dark:hover:text-white border border-red-600 dark:border-red-400 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition-colors">
+                                <i class="fas fa-trash ml-1"></i> حذف
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Assignment Card 3 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">تحلیل داده‌های بزرگ</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">همایش علوم داده و یادگیری ماشین</p>
+                            </div>
+                            <div class="mt-3 md:mt-0 flex items-center">
+                                <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200">
+                                    آینده
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-calendar-day ml-1"></i>
+                                <span>تاریخ ارائه: ۱۰ دی ۱۴۰۳</span>
+                            </div>
+                            <div class="flex items-center ml-4 mb-2">
+                                <i class="fas fa-clock ml-1"></i>
+                                <span>مهلت تحویل: ۲۱ روز</span>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-users ml-1"></i>
+                                <span>تعداد تحویل داده شده: ۰ از ۲۰</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">استفاده از روش‌های تحلیل داده‌های بزرگ برای استخراج الگوهای معنادار از مجموعه داده‌های مشخص شده.</p>
+                        
+                        <div class="flex flex-wrap gap-2">
+                            <button class="px-3 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                <i class="fas fa-eye ml-1"></i> مشاهده جزئیات
+                            </button>
+                            <button class="px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 transition-colors">
+                                <i class="fas fa-edit ml-1"></i> ویرایش
+                            </button>
+                            <button class="px-3 py-1.5 text-sm font-medium text-red-600 dark:text-red-400 hover:text-white hover:bg-red-600 dark:hover:bg-red-600 dark:hover:text-white border border-red-600 dark:border-red-400 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition-colors">
+                                <i class="fas fa-trash ml-1"></i> حذف
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Create Assignment Modal (hidden by default) -->
+    <div id="createAssignmentModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white dark:bg-gray-800 w-full max-w-xl rounded-lg shadow-lg p-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white">ایجاد تکلیف جدید</h2>
+                <button id="closeCreateAssignmentModal" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="createAssignmentForm">
+                <div class="space-y-4">
+                    <div>
+                        <label for="assignmentTitle" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">عنوان تکلیف</label>
+                        <input type="text" id="assignmentTitle" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    
+                    <div>
+                        <label for="assignmentConference" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">همایش مرتبط</label>
+                        <select id="assignmentConference" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <option value="">انتخاب کنید</option>
+                            <option>همایش هوش مصنوعی و کاربردهای آن</option>
+                            <option>همایش امنیت سایبری</option>
+                            <option>همایش علوم داده و یادگیری ماشین</option>
+                            <option>همایش توسعه وب مدرن</option>
+                        </select>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="assignmentStartDate" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">تاریخ ارائه</label>
+                            <input type="date" id="assignmentStartDate" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        
+                        <div>
+                            <label for="assignmentDeadlineDays" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">مهلت تحویل (روز)</label>
+                            <input type="number" id="assignmentDeadlineDays" min="1" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="assignmentDescription" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">توضیحات تکلیف</label>
+                        <textarea id="assignmentDescription" rows="4" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                    </div>
+                    
+                    <div>
+                        <label for="assignmentFiles" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">فایل‌های پیوست</label>
+                        <input type="file" id="assignmentFiles" class="w-full px-4 py-2 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" multiple>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <button type="button" id="cancelCreateAssignment" class="px-4 py-2 mr-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 transition-colors">
+                        انصراف
+                    </button>
+                    <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                        ایجاد تکلیف
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="js/theme.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/teacher-assignments.js"></script>
+</body>
+</html> 

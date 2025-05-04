@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد - سامانه مدیریت همایش‌ها</title>
+    <script>
+        // Configure Tailwind to use class strategy for dark mode
+        tailwind = {
+            config: {
+                darkMode: 'class'
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div class="min-h-screen flex flex-col md:flex-row">
+        <!-- Sidebar - Hidden on mobile -->
+        <aside class="hidden md:flex md:w-64 flex-col bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 h-screen sticky top-0">
+            <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                <h2 class="text-xl font-bold text-gray-800 dark:text-white">سامانه همایش‌ها</h2>
+            </div>
+            
+            <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                        <span id="userInitials">ک</span>
+                    </div>
+                    <div>
+                        <p id="userName" class="font-medium text-gray-900 dark:text-white">کاربر نمونه</p>
+                        <p id="userRole" class="text-sm text-gray-500 dark:text-gray-400">دانشجو</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="flex-1 p-4 overflow-y-auto">
+                <ul class="space-y-2" id="sidebarMenu">
+                    <li>
+                        <a href="#dashboard" class="flex items-center space-x-2 space-x-reverse p-2 rounded-md text-blue-600 bg-blue-50 dark:bg-blue-900/20 dark:text-blue-400">
+                            <i class="fas fa-home w-5 text-center"></i>
+                            <span>داشبورد</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#conferences" class="flex items-center space-x-2 space-x-reverse p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-calendar-alt w-5 text-center"></i>
+                            <span>همایش‌ها</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#profile" class="flex items-center space-x-2 space-x-reverse p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-user w-5 text-center"></i>
+                            <span>پروفایل</span>
+                        </a>
+                    </li>
+                    <li class="teacher-only hidden">
+                        <a href="#students" class="flex items-center space-x-2 space-x-reverse p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-users w-5 text-center"></i>
+                            <span>دانشجویان</span>
+                        </a>
+                    </li>
+                    <li class="teacher-only hidden">
+                        <a href="#assignments" class="flex items-center space-x-2 space-x-reverse p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-tasks w-5 text-center"></i>
+                            <span>تکالیف</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#files" class="flex items-center space-x-2 space-x-reverse p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-file w-5 text-center"></i>
+                            <span>فایل‌ها</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+                <button id="sidebarThemeToggle" onclick="toggleTheme()" class="flex items-center space-x-2 space-x-reverse p-2 w-full rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <i id="sidebarThemeIcon" class="fas fa-moon w-5 text-center"></i>
+                    <span id="sidebarThemeText">حالت تاریک</span>
+                </button>
+                
+                <button id="logoutBtn" class="mt-2 flex items-center space-x-2 space-x-reverse p-2 w-full rounded-md text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20">
+                    <i class="fas fa-sign-out-alt w-5 text-center"></i>
+                    <span>خروج</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Mobile header -->
+        <header class="md:hidden bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-xl font-bold text-gray-800 dark:text-white">سامانه همایش‌ها</h1>
+                <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile menu - Hidden by default -->
+            <div id="mobileMenu" class="hidden fixed top-0 right-0 h-full w-64 bg-white dark:bg-gray-800 shadow-lg z-50 transform transition-transform duration-300 ease-in-out border-l border-gray-200 dark:border-gray-700 overflow-y-auto">
+                <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+                    <h2 class="text-lg font-bold text-gray-800 dark:text-white">سامانه همایش‌ها</h2>
+                    <button onclick="toggleMobileMenu()" class="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="flex items-center space-x-3 space-x-reverse p-4 border-b border-gray-200 dark:border-gray-700">
+                    <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                        <span id="mobileUserInitials">ک</span>
+                    </div>
+                    <div>
+                        <p id="mobileUserName" class="font-medium text-gray-900 dark:text-white">کاربر نمونه</p>
+                        <p id="mobileUserRole" class="text-sm text-gray-500 dark:text-gray-400">دانشجو</p>
+                    </div>
+                </div>
+                
+                <nav class="mt-4">
+                    <ul class="space-y-2 p-4">
+                        <li>
+                            <a href="#dashboard" class="flex items-center space-x-2 space-x-reverse p-2 rounded-md text-blue-600 bg-blue-50 dark:bg-blue-900/20 dark:text-blue-400">
+                                <i class="fas fa-home w-5 text-center"></i>
+                                <span>داشبورد</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#conferences" class="flex items-center space-x-2 space-x-reverse p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i class="fas fa-calendar-alt w-5 text-center"></i>
+                                <span>همایش‌ها</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#profile" class="flex items-center space-x-2 space-x-reverse p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i class="fas fa-user w-5 text-center"></i>
+                                <span>پروفایل</span>
+                            </a>
+                        </li>
+                        <li class="teacher-only hidden">
+                            <a href="#students" class="flex items-center space-x-2 space-x-reverse p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i class="fas fa-users w-5 text-center"></i>
+                                <span>دانشجویان</span>
+                            </a>
+                        </li>
+                        <li class="teacher-only hidden">
+                            <a href="#assignments" class="flex items-center space-x-2 space-x-reverse p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i class="fas fa-tasks w-5 text-center"></i>
+                                <span>تکالیف</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#files" class="flex items-center space-x-2 space-x-reverse p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i class="fas fa-file w-5 text-center"></i>
+                                <span>فایل‌ها</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <div class="mt-4 space-y-2 p-4 border-t border-gray-200 dark:border-gray-700">
+                    <button id="mobileThemeToggle" onclick="toggleTheme()" class="flex items-center space-x-2 space-x-reverse p-2 w-full rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i id="mobileThemeIcon" class="fas fa-moon w-5 text-center"></i>
+                        <span id="mobileThemeText">حالت تاریک</span>
+                    </button>
+                    
+                    <button id="mobileLogoutBtn" class="flex items-center space-x-2 space-x-reverse p-2 w-full rounded-md text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20">
+                        <i class="fas fa-sign-out-alt w-5 text-center"></i>
+                        <span>خروج</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Overlay for mobile menu -->
+            <div id="mobileMenuOverlay" onclick="toggleMobileMenu()" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+        </header>
+        
+        <!-- Main content -->
+        <main class="flex-1 p-6 overflow-auto">
+            <div id="mainContent">
+                <!-- Content will be loaded here dynamically -->
+                <div id="dashboardContent">
+                    <div class="mb-6">
+                        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">داشبورد</h1>
+                        <p class="text-gray-600 dark:text-gray-400">خوش آمدید به سامانه مدیریت همایش‌ها</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 dark:text-gray-400 text-sm">تعداد همایش‌ها</p>
+                                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white">۵</h3>
+                                </div>
+                                <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center text-blue-600 dark:text-blue-400">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 dark:text-gray-400 text-sm">همایش‌های ثبت‌نام شده</p>
+                                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white">۲</h3>
+                                </div>
+                                <div class="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center text-green-600 dark:text-green-400">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 dark:text-gray-400 text-sm">فایل‌های دانلود شده</p>
+                                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white">۷</h3>
+                                </div>
+                                <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/20 rounded-full flex items-center justify-center text-purple-600 dark:text-purple-400">
+                                    <i class="fas fa-file-download"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-8">
+                        <div class="border-b border-gray-200 dark:border-gray-700 px-6 py-4">
+                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">همایش‌های آینده</h2>
+                        </div>
+                        <div class="p-6">
+                            <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+                                <li class="py-4 first:pt-0 last:pb-0">
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between">
+                                        <div class="mb-2 md:mb-0">
+                                            <h3 class="text-lg font-medium text-gray-900 dark:text-white">همایش هوش مصنوعی و کاربردهای آن</h3>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                <span class="inline-flex items-center">
+                                                    <i class="fas fa-calendar-day ml-1"></i> ۱۰ مهر ۱۴۰۳
+                                                </span>
+                                                <span class="inline-flex items-center mr-4">
+                                                    <i class="fas fa-map-marker-alt ml-1"></i> دانشکده مهندسی کامپیوتر
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <button class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                                ثبت‌نام
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-4 first:pt-0 last:pb-0">
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between">
+                                        <div class="mb-2 md:mb-0">
+                                            <h3 class="text-lg font-medium text-gray-900 dark:text-white">همایش امنیت سایبری</h3>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                <span class="inline-flex items-center">
+                                                    <i class="fas fa-calendar-day ml-1"></i> ۲۵ آبان ۱۴۰۳
+                                                </span>
+                                                <span class="inline-flex items-center mr-4">
+                                                    <i class="fas fa-map-marker-alt ml-1"></i> تالار امیرکبیر
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <button class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                                                ثبت‌نام
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                        <div class="border-b border-gray-200 dark:border-gray-700 px-6 py-4">
+                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">آخرین فایل‌ها</h2>
+                        </div>
+                        <div class="p-6">
+                            <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+                                <li class="py-3 first:pt-0 last:pb-0">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/20 rounded-md flex items-center justify-center text-blue-600 dark:text-blue-400">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </div>
+                                            <div class="mr-3">
+                                                <h4 class="text-sm font-medium text-gray-900 dark:text-white">جزوه هوش مصنوعی</h4>
+                                                <p class="text-xs text-gray-500 dark:text-gray-400">۲.۵ مگابایت</p>
+                                            </div>
+                                        </div>
+                                        <button class="p-2 text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                    </div>
+                                </li>
+                                <li class="py-3 first:pt-0 last:pb-0">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 bg-green-100 dark:bg-green-900/20 rounded-md flex items-center justify-center text-green-600 dark:text-green-400">
+                                                <i class="fas fa-file-excel"></i>
+                                            </div>
+                                            <div class="mr-3">
+                                                <h4 class="text-sm font-medium text-gray-900 dark:text-white">برنامه کلاس‌ها</h4>
+                                                <p class="text-xs text-gray-500 dark:text-gray-400">۵۰۰ کیلوبایت</p>
+                                            </div>
+                                        </div>
+                                        <button class="p-2 text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                    </div>
+                                </li>
+                                <li class="py-3 first:pt-0 last:pb-0">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/20 rounded-md flex items-center justify-center text-purple-600 dark:text-purple-400">
+                                                <i class="fas fa-file-powerpoint"></i>
+                                            </div>
+                                            <div class="mr-3">
+                                                <h4 class="text-sm font-medium text-gray-900 dark:text-white">ارائه پروژه نهایی</h4>
+                                                <p class="text-xs text-gray-500 dark:text-gray-400">۱.۸ مگابایت</p>
+                                            </div>
+                                        </div>
+                                        <button class="p-2 text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/theme.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html> 
