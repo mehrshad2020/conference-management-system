@@ -1,10 +1,10 @@
-
+// Theme handling (dark/light mode)
 document.addEventListener('DOMContentLoaded', function() {
-    
+    // Configure Tailwind dark mode to use class strategy
     if (window.tailwind && window.tailwind.config) {
         window.tailwind.config.darkMode = 'class';
     } else {
-        
+        // If tailwind object isn't available yet, add a script to configure it
         const tailwindConfig = document.createElement('script');
         tailwindConfig.textContent = `
             tailwind.config = {
@@ -14,11 +14,11 @@ document.addEventListener('DOMContentLoaded', function() {
         document.head.appendChild(tailwindConfig);
     }
     
-   
+    // Check for theme preference in localStorage
     const savedTheme = localStorage.getItem('theme');
     const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     
-    
+    // Set initial theme based on saved preference or system preference
     if (savedTheme === 'dark' || (savedTheme === null && systemPreference === 'dark')) {
         document.documentElement.classList.add('dark');
         updateThemeIcons(true);
@@ -27,21 +27,21 @@ document.addEventListener('DOMContentLoaded', function() {
         updateThemeIcons(false);
     }
     
-   
+    // Toggle theme buttons
     const themeToggleButtons = [
         document.getElementById('themeToggle'),
         document.getElementById('sidebarThemeToggle'),
         document.getElementById('mobileThemeToggle')
     ];
     
-  
+    // Add event listeners to all theme toggle buttons
     themeToggleButtons.forEach(button => {
         if (button) {
             button.addEventListener('click', toggleTheme);
         }
     });
     
-  
+    // Add event listener for dynamic elements that might be loaded later
     document.addEventListener('click', function(event) {
         if (event.target && (
             event.target.id === 'sidebarThemeToggle' || 
@@ -54,6 +54,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Function to toggle between light and dark themes
+// Make toggleTheme globally accessible
 window.toggleTheme = function() {
     if (document.documentElement.classList.contains('dark')) {
         document.documentElement.classList.remove('dark');
@@ -66,8 +68,9 @@ window.toggleTheme = function() {
     }
 }
 
+// Function to update theme icons and text
 window.updateThemeIcons = function(isDark) {
- 
+    // Update theme icons and text in all theme toggle buttons
     const themeIcons = [
         document.getElementById('themeIcon'),
         document.getElementById('sidebarThemeIcon'),

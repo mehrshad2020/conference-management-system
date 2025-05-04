@@ -1,5 +1,4 @@
-﻿
-document.addEventListener('DOMContentLoaded', function() {
+﻿document.addEventListener('DOMContentLoaded', function() {
  
     const registerBtn = document.getElementById('registerBtn');
     const registrationModal = document.getElementById('registrationModal');
@@ -8,7 +7,16 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (registerBtn && registrationModal) {
         registerBtn.addEventListener('click', function() {
-            registrationModal.classList.remove('hidden');
+            // Check if user is logged in before allowing registration
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            
+            if (isLoggedIn) {
+                registrationModal.classList.remove('hidden');
+            } else {
+                alert('برای ثبت‌نام در همایش، ابتدا باید وارد سیستم شوید.');
+                // Optionally redirect to login page
+                // window.location.href = 'index.html';
+            }
         });
     }
     
@@ -37,8 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
         registrationForm.addEventListener('submit', function(event) {
             event.preventDefault();
             
-          
-            // alert('Ø«Ø¨Øªâ€ŒÙ†Ø§Ù… Ø´Ù…Ø§ Ø¨Ø§ Ù…ÙˆÙÙ‚ÛŒØª Ø§Ù†Ø¬Ø§Ù… Ø´Ø¯!');/
             registrationModal.classList.add('hidden');
         });
     }
@@ -185,9 +191,9 @@ function getConferenceData(id) {
     };
     
     return conferences[id] || conferences['1']; 
+}
 
-
-func
+function updateConferenceDetails(conferenceData) {
     document.title = `${conferenceData.title} - Ø³Ø§Ù…Ø§Ù†Ù‡ Ù…Ø¯ÛŒØ±ÛŒØª Ù‡Ù…Ø§ÛŒØ´â€ŒÙ‡Ø§`;
     
     // Update header information

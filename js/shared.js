@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const userRole = localStorage.getItem('userRole') || 'student'; // Default to student if not set
     
-    // Load sidebar if user is logged in
-    if (isLoggedIn && document.getElementById('sidebar-container')) {
+    // Always load the sidebar - no longer depends on login status
+    if (document.getElementById('sidebar-container')) {
         loadSidebar();
     }
     
@@ -121,6 +121,9 @@ function loadSidebar() {
     const sidebarContainer = document.getElementById('sidebar-container');
     if (!sidebarContainer) return;
     
+    // Check if user is logged in
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    
     // Instead of fetching from dashboard.html, use hardcoded HTML
     const sidebarHTML = `
         <!-- Sidebar - Hidden on mobile -->
@@ -188,10 +191,17 @@ function loadSidebar() {
                     <span id="sidebarThemeText">حالت تاریک</span>
                 </button>
                 
-                <button id="logoutBtn" class="mt-2 flex items-center space-x-2 space-x-reverse p-2 w-full rounded-md text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20">
-                    <i class="fas fa-sign-out-alt w-5 text-center"></i>
-                    <span>خروج</span>
-                </button>
+                ${isLoggedIn ? 
+                    `<button id="logoutBtn" class="mt-2 flex items-center space-x-2 space-x-reverse p-2 w-full rounded-md text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20">
+                        <i class="fas fa-sign-out-alt w-5 text-center"></i>
+                        <span>خروج</span>
+                    </button>` 
+                    : 
+                    `<a href="index.html" class="mt-2 flex items-center space-x-2 space-x-reverse p-2 w-full rounded-md text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20">
+                        <i class="fas fa-sign-in-alt w-5 text-center"></i>
+                        <span>ورود</span>
+                    </a>`
+                }
             </div>
         </aside>
         
@@ -270,10 +280,17 @@ function loadSidebar() {
                         <span id="mobileThemeText">حالت تاریک</span>
                     </button>
                     
-                    <button id="mobileLogoutBtn" class="flex items-center space-x-2 space-x-reverse p-2 w-full rounded-md text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20">
-                        <i class="fas fa-sign-out-alt w-5 text-center"></i>
-                        <span>خروج</span>
-                    </button>
+                    ${isLoggedIn ? 
+                        `<button id="mobileLogoutBtn" class="flex items-center space-x-2 space-x-reverse p-2 w-full rounded-md text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20">
+                            <i class="fas fa-sign-out-alt w-5 text-center"></i>
+                            <span>خروج</span>
+                        </button>` 
+                        : 
+                        `<a href="index.html" class="flex items-center space-x-2 space-x-reverse p-2 w-full rounded-md text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20">
+                            <i class="fas fa-sign-in-alt w-5 text-center"></i>
+                            <span>ورود</span>
+                        </a>`
+                    }
                 </div>
             </div>
             <!-- Overlay for mobile menu -->
