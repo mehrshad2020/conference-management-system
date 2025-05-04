@@ -1,4 +1,6 @@
 # سامانه مدیریت همایش‌ها (Conference Management System)
+![image](https://github.com/user-attachments/assets/c9d9774e-7843-4acc-8554-e625ff7dade5)
+
 
 این پروژه یک پنل مدیریتی واکنش‌گرا برای مدیریت همایش‌ها است که با HTML، JavaScript و Tailwind CSS ساخته شده است. این سیستم از هر دو حالت روشن و تاریک پشتیبانی می‌کند.
 
